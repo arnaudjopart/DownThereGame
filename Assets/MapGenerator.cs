@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MapGenerator : MonoBehaviour {
 
@@ -12,6 +13,8 @@ public class MapGenerator : MonoBehaviour {
     public int randomFillPercent;
     public bool randomSeed;
 
+    private List<MapCoordonates> coordonatesAlreadyChecked = new List<MapCoordonates>();
+    private List<List<MapCoordonates>> cavesList = new List<List<MapCoordonates>>();
     public GameObject square;
 
     [Range(0, 5)]
@@ -47,8 +50,8 @@ public class MapGenerator : MonoBehaviour {
 
         RandomFillMap();
         SmoothMap(smoothIterations);
-        //Isolate
         ClearSingleTiles();
+        FindCaves();
         DrawMap();
 
 
@@ -146,7 +149,7 @@ public class MapGenerator : MonoBehaviour {
                 for (int y = 0; y < height; y++)
                 {
                     Gizmos.color = (map[x, y] == 1) ? Color.black : Color.white;
-                    Vector3 pos = new Vector3(-width / 2 + x + .5f, height / 2 - y - .5f,5 );
+                    Vector3 pos = new Vector3(-width / 2 + x + 1, height / 2 - y - 1,5 );
                     Gizmos.DrawCube(pos, Vector3.one);
                 }
             }
@@ -289,6 +292,83 @@ public class MapGenerator : MonoBehaviour {
     {
 
     }
+    private void FindCaves()
+    {
+        if (map != null)
+        {
 
+            
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    if (map[i, j] == 0 && CheckIfInList(i,j,coordonatesAlreadyChecked)==false)
+                    {
+                        List<MapCoordonates> currentCaveAreaList = new List<MapCoordonates>();
+                        List<MapCoordonates> coordonatesToCheckList = new List<MapCoordonates>();
+                        MapCoordonates coord = new MapCoordonates(i, j);
+                        coordonatesToCheckList.Add(coord);
+                        while (coordonatesToCheckList.Count > 0)
+                        {
+                            MapCoordonates testCoord = coordonatesToCheckList[0];
+
+                            if (map[testCoord.X - 1, testCoord.Y] == 0 && CheckIfInList(testCoord.X - 1, testCoord.Y, coordonatesToCheckList)==false)
+                            {
+                                coordonatesToCheckList.Add(new MapCoordonates(testCoord.X - 1, testCoord.Y));
+                            }
+                            if (map[testCoord.X, testCoord.Y+1] == 0 && CheckIfInList(testCoord.X, testCoord.Y + 1, coordonatesToCheckList) == false)
+                            {
+                                coordonatesToCheckList.Add(new MapCoordonates(testCoord.X, testCoord.Y + 1));
+                            }
+                            if (map[testCoord.X+1, testCoord.Y] == 0 && CheckIfInList(testCoord.X + 1, testCoord.Y, coordonatesToCheckList) == false)
+                            {
+                                coordonatesToCheckList.Add(new MapCoordonates(testCoord.X + 1, testCoord.Y));
+                            }
+                            if (map[testCoord.X, testCoord.Y-1] == 0 && CheckIfInList(testCoord.X, testCoord.Y - 1, coordonatesToCheckList) == false)
+                            {
+                                coordonatesToCheckList.Add(new MapCoordonates(testCoord.X, testCoord.Y - 1));
+                            }
+                            coordonatesToCheckList.Remove(testCoord);
+                            currentCaveAreaList.Add(testCoord);
+                            coordonatesAlreadyChecked.Add(testCoord);
+                        }
+
+                        cavesList.Add(currentCaveAreaList); 
+                        
+                    }
+                }
+            }
+        }
+    }
+    public class MapCoordonates
+    {
+        public int X, Y;
+        public MapCoordonates(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+        public bool isEqualTo(int i,int j)
+        {
+            if(X == i && Y == j)
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
+        }
+    }
+    private bool CheckIfInList(int i, int j, List<MapCoordonates> list)
+    {
+        foreach(MapCoordonates coordToCheck in list)
+        {
+            if (coordToCheck.isEqualTo(i,j))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
