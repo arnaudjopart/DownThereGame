@@ -18,6 +18,7 @@ public class Move : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         
+        
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
@@ -32,5 +33,15 @@ public class Move : MonoBehaviour {
         Vector3 targetPosition = target.transform.TransformPoint(offSet);
 
         this.transform.position = Vector3.SmoothDamp(this.transform.position, targetPosition, ref velocity, smoothTime);
+
+        Vector3 cameraPositionOnXY = new Vector3(this.transform.position.x, this.transform.position.y, 0);
+        if (Vector3.Distance(cameraPositionOnXY, target.transform.position) > 10)
+        {
+            target.SetActive(false);
+        }
+        else
+        {
+            target.SetActive(true);
+        }
     }
 }

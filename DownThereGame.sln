@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DownThereGame.CSharp", "DownThereGame.CSharp.csproj", "{AF869FB7-E34B-1ECA-239F-5A225D2FD9DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DownThereGame.CSharp.Editor", "DownThereGame.CSharp.Editor.csproj", "{82BCB154-B6E0-B3AE-B100-669868467794}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF869FB7-E34B-1ECA-239F-5A225D2FD9DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF869FB7-E34B-1ECA-239F-5A225D2FD9DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF869FB7-E34B-1ECA-239F-5A225D2FD9DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF869FB7-E34B-1ECA-239F-5A225D2FD9DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82BCB154-B6E0-B3AE-B100-669868467794}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82BCB154-B6E0-B3AE-B100-669868467794}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82BCB154-B6E0-B3AE-B100-669868467794}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82BCB154-B6E0-B3AE-B100-669868467794}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
