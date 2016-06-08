@@ -47,6 +47,7 @@ public class MapGenerator : MonoBehaviour {
 
         RandomFillMap();
         SmoothMap(smoothIterations);
+        //Isolate
         ClearSingleTiles();
         DrawMap();
 
@@ -163,7 +164,7 @@ public class MapGenerator : MonoBehaviour {
                 {
                     if (map[i, j] > 0)
                     {
-                        Vector3 pos = new Vector3(-width / 2 + i /*- .5f*/, height / 2 - j /*+ .5f*/, 0);
+                        Vector3 pos = new Vector3(-width / 2 + i, height / 2 - j, 0);
                         GameObject tile = Instantiate(square, pos, Quaternion.identity) as GameObject;
                         SpriteRenderer renderer = tile.GetComponent<SpriteRenderer>();
                         int spriteIndex = GetSpriteIndex(i, j);
