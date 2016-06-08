@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapGenerator.CSharp", "MapGenerator.CSharp.csproj", "{F3925561-3322-23D4-1720-7F1EF4E9425B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapGenerator.CSharp.Editor", "MapGenerator.CSharp.Editor.csproj", "{541AF1D4-B22C-7136-58CD-FB32C2AC76FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3925561-3322-23D4-1720-7F1EF4E9425B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3925561-3322-23D4-1720-7F1EF4E9425B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3925561-3322-23D4-1720-7F1EF4E9425B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3925561-3322-23D4-1720-7F1EF4E9425B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{541AF1D4-B22C-7136-58CD-FB32C2AC76FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541AF1D4-B22C-7136-58CD-FB32C2AC76FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541AF1D4-B22C-7136-58CD-FB32C2AC76FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541AF1D4-B22C-7136-58CD-FB32C2AC76FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

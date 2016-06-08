@@ -1,0 +1,18 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+<<<<<<< HEAD
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Move.cs">
+    <Files>
+      <File FileName="Assets\Move.cs" Line="32" Column="1" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Player\PlayerStatePattern.cs">
+    <Files>
+      <File FileName="Assets\Player\PlayerStatePattern.cs" Line="13" Column="24" />
+>>>>>>> 2aa983eb91b96cc5d5a984b916072a568d5fe7f2
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
