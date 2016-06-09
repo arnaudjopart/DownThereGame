@@ -14,8 +14,10 @@ public class MapGenerator : MonoBehaviour {
     public bool randomSeed;
 
     private List<MapCoordonates> coordonatesAlreadyChecked = new List<MapCoordonates>();
-    private List<List<MapCoordonates>> cavesList = new List<List<MapCoordonates>>();
+    private List<Cave> cavesList = new List<Cave>();
     public GameObject square;
+    public GameObject water;
+    public GameObject lava;
 
     [Range(0, 5)]
     public int smoothIterations;
@@ -53,7 +55,7 @@ public class MapGenerator : MonoBehaviour {
         ClearSingleTiles();
         FindCaves();
         DrawMap();
-
+        PopulateCaves();
 
     }
     private void RandomFillMap()
@@ -295,9 +297,7 @@ public class MapGenerator : MonoBehaviour {
     private void FindCaves()
     {
         if (map != null)
-        {
-
-            
+        {           
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
@@ -346,14 +346,26 @@ public class MapGenerator : MonoBehaviour {
                             
                         }
                         print(currentCaveAreaList.Count);
-                        cavesList.Add(currentCaveAreaList); 
+                        currentCaveAreaList.Sort(CompareHeight);
+                        Cave cave = new Cave(currentCaveAreaList);
+                        cavesList.Add(cave); 
                         
                     }
                 }
             }
         }
+        
         print(cavesList.Count);
 
+    }
+
+    public class Cave
+    {
+        private List<MapCoordonates> caveCoordonatesList;
+        public Cave(List<MapCoordonates> list)
+        {
+            caveCoordonatesList = list;
+        }
     }
     public class MapCoordonates
     {
@@ -387,6 +399,19 @@ public class MapGenerator : MonoBehaviour {
             }
         }
         return false;
+    }
+
+    private int CompareHeight(MapCoordonates a, MapCoordonates b)
+    {
+        return b.Y - a.Y;
+    }
+
+    private void PolulateCaves()
+    {
+        foreach(Cave cave in cavesList)
+        {
+
+        }
     }
 
 }
