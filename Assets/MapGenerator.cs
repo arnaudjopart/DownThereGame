@@ -307,42 +307,59 @@ public class MapGenerator : MonoBehaviour {
                         List<MapCoordonates> currentCaveAreaList = new List<MapCoordonates>();
                         List<MapCoordonates> coordonatesToCheckList = new List<MapCoordonates>();
                         MapCoordonates coord = new MapCoordonates(i, j);
+                        coord.Origin = new MapCoordonates(0, 0);
                         coordonatesToCheckList.Add(coord);
                         while (coordonatesToCheckList.Count > 0)
                         {
                             MapCoordonates testCoord = coordonatesToCheckList[0];
-
-                            if (map[testCoord.X - 1, testCoord.Y] == 0 && CheckIfInList(testCoord.X - 1, testCoord.Y, coordonatesToCheckList)==false)
+                            //Test au dessus
+                            if (map[testCoord.X, testCoord.Y-1] == 0 && CheckIfInList(testCoord.X, testCoord.Y - 1,currentCaveAreaList) ==false && CheckIfInList(testCoord.X, testCoord.Y - 1, coordonatesToCheckList)==false)
                             {
-                                coordonatesToCheckList.Add(new MapCoordonates(testCoord.X - 1, testCoord.Y));
+                                MapCoordonates newCoord = new MapCoordonates(testCoord.X, testCoord.Y - 1);
+                                newCoord.Origin = testCoord;
+                                coordonatesToCheckList.Add(newCoord);
                             }
-                            if (map[testCoord.X, testCoord.Y+1] == 0 && CheckIfInList(testCoord.X, testCoord.Y + 1, coordonatesToCheckList) == false)
+                            //Test à droite
+                            if (map[testCoord.X+1, testCoord.Y] == 0 && CheckIfInList(testCoord.X + 1, testCoord.Y,currentCaveAreaList) == false && CheckIfInList(testCoord.X + 1, testCoord.Y, coordonatesToCheckList) == false)
                             {
-                                coordonatesToCheckList.Add(new MapCoordonates(testCoord.X, testCoord.Y + 1));
+                                MapCoordonates newCoord = new MapCoordonates(testCoord.X + 1, testCoord.Y);
+                                newCoord.Origin = testCoord;
+                                coordonatesToCheckList.Add(newCoord);
                             }
-                            if (map[testCoord.X+1, testCoord.Y] == 0 && CheckIfInList(testCoord.X + 1, testCoord.Y, coordonatesToCheckList) == false)
+                            //Test en bas
+                            if (map[testCoord.X, testCoord.Y+1] == 0 && CheckIfInList(testCoord.X, testCoord.Y + 1,currentCaveAreaList) == false && CheckIfInList(testCoord.X, testCoord.Y + 1, coordonatesToCheckList) == false)
                             {
-                                coordonatesToCheckList.Add(new MapCoordonates(testCoord.X + 1, testCoord.Y));
+                                MapCoordonates newCoord = new MapCoordonates(testCoord.X, testCoord.Y + 1);
+                                newCoord.Origin = testCoord;
+                                coordonatesToCheckList.Add(newCoord);
                             }
-                            if (map[testCoord.X, testCoord.Y-1] == 0 && CheckIfInList(testCoord.X, testCoord.Y - 1, coordonatesToCheckList) == false)
+                            //Test à gauche
+                            if (map[testCoord.X-1, testCoord.Y] == 0 && CheckIfInList(testCoord.X - 1, testCoord.Y,currentCaveAreaList) == false && CheckIfInList(testCoord.X - 1, testCoord.Y, coordonatesToCheckList) == false)
                             {
-                                coordonatesToCheckList.Add(new MapCoordonates(testCoord.X, testCoord.Y - 1));
+                                MapCoordonates newCoord = new MapCoordonates(testCoord.X - 1, testCoord.Y);
+                                newCoord.Origin = testCoord;
+                                coordonatesToCheckList.Add(newCoord);
                             }
                             coordonatesToCheckList.Remove(testCoord);
                             currentCaveAreaList.Add(testCoord);
                             coordonatesAlreadyChecked.Add(testCoord);
+                            
                         }
-
+                        print(currentCaveAreaList.Count);
                         cavesList.Add(currentCaveAreaList); 
                         
                     }
                 }
             }
         }
+        print(cavesList.Count);
+
     }
     public class MapCoordonates
     {
         public int X, Y;
+        private MapCoordonates origin;
+
         public MapCoordonates(int x, int y)
         {
             X = x;
@@ -358,6 +375,7 @@ public class MapGenerator : MonoBehaviour {
                 return false;
             }
         }
+        public MapCoordonates Origin { get { return origin; } set { origin = value; } }
     }
     private bool CheckIfInList(int i, int j, List<MapCoordonates> list)
     {

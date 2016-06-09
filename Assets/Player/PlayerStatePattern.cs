@@ -43,7 +43,7 @@ public class PlayerStatePattern : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print(currentState);
+        //print(currentState);
         currentState.UpdateState();
 	}
 }
