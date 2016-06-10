@@ -30,7 +30,7 @@ public class MapGenerator : MonoBehaviour {
     // Use this for initialization
     void Start () {
         map = new int[width, height];
-        sprites = Resources.LoadAll<Sprite>("sheet");
+        sprites = Resources.LoadAll<Sprite>("sheetx64");
         GenerateMap();
         
         
@@ -55,7 +55,7 @@ public class MapGenerator : MonoBehaviour {
         ClearSingleTiles();
         FindCaves();
         DrawMap();
-        //PopulateCaves();
+        PopulateCaves();
 
     }
     private void RandomFillMap()
@@ -346,8 +346,9 @@ public class MapGenerator : MonoBehaviour {
                             
                         }
                         print(currentCaveAreaList.Count);
-                        currentCaveAreaList.Sort(CompareHeight);
-                        Cave cave = new Cave(currentCaveAreaList);
+                        
+                        Cave cave = new Cave(this,currentCaveAreaList);
+                        
                         cavesList.Add(cave); 
                         
                     }
@@ -358,19 +359,67 @@ public class MapGenerator : MonoBehaviour {
         print(cavesList.Count);
 
     }
+    private bool CheckIfInList(int i, int j, List<MapCoordonates> list)
+    {
+        foreach (MapCoordonates coordToCheck in list)
+        {
+            if (coordToCheck.isEqualTo(i, j))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private void PopulateCaves()
+    {
+        foreach (Cave cave in cavesList)
+        {
+            cave.CreateWater();
+        }
+    }
+
 
     public class Cave
     {
         private List<MapCoordonates> caveCoordonatesList;
-        public Cave(List<MapCoordonates> list)
+        private MapGenerator mg;
+        private bool isAllowedToHaveWater;
+         
+        public Cave(MapGenerator mapGen,List<MapCoordonates> list)
         {
             caveCoordonatesList = list;
+            caveCoordonatesList.Sort(CompareHeight);
+            mg = mapGen;
+            isAllowedToHaveWater = list.Count > 20 ? true : false;
+        }
+        public void CreateWater()
+        {
+            if (isAllowedToHaveWater)
+            {
+                foreach (MapCoordonates mc in caveCoordonatesList)
+                {
+
+                    if (mc.Y > 30)
+                    {
+                        Vector3 spawnPosition = new Vector3(-64 + mc.X, 36 - mc.Y, 0);
+                        GameObject water = Instantiate(mg.water, spawnPosition, Quaternion.identity) as GameObject;
+                        water.transform.SetParent(mg.transform, false);
+                    }
+                }
+            }
+            
+        }
+        private int CompareHeight(MapCoordonates a, MapCoordonates b)
+        {
+            return b.Y - a.Y;
         }
     }
     public class MapCoordonates
     {
         public int X, Y;
         private MapCoordonates origin;
+        private MapCoordonates localCoordonates; 
 
         public MapCoordonates(int x, int y)
         {
@@ -389,29 +438,6 @@ public class MapGenerator : MonoBehaviour {
         }
         public MapCoordonates Origin { get { return origin; } set { origin = value; } }
     }
-    private bool CheckIfInList(int i, int j, List<MapCoordonates> list)
-    {
-        foreach(MapCoordonates coordToCheck in list)
-        {
-            if (coordToCheck.isEqualTo(i,j))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private int CompareHeight(MapCoordonates a, MapCoordonates b)
-    {
-        return b.Y - a.Y;
-    }
-
-    private void PolulateCaves()
-    {
-        foreach(Cave cave in cavesList)
-        {
-
-        }
-    }
+    
 
 }

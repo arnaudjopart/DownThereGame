@@ -85,6 +85,7 @@
     <Compile Include="Assets\UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\sheetx64.xml" />
     <None Include="Assets\Resources\spritesheet_tiles.xml" />
     <None Include="Assets\sheet.xml" />
   </ItemGroup>
