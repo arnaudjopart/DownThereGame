@@ -400,7 +400,7 @@ public class MapGenerator : MonoBehaviour {
                 foreach (MapCoordonates mc in caveCoordonatesList)
                 {
 
-                    if (mc.Y > 30)
+                    if (mc.Y > 20)
                     {
                         Vector3 spawnPosition = new Vector3(-64 + mc.X, 36 - mc.Y, 0);
                         GameObject water = Instantiate(mg.water, spawnPosition, Quaternion.identity) as GameObject;
