@@ -55,7 +55,7 @@ public class MapGenerator : MonoBehaviour {
         ClearSingleTiles();
         FindCaves();
         DrawMap();
-        PopulateCaves();
+        //PopulateCaves();
 
     }
     private void RandomFillMap()

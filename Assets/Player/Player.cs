@@ -15,9 +15,18 @@ public class Player : MonoBehaviour {
     private SpringJoint2D sj2D;
     public LayerMask whatIsGround;
 
+    public delegate void OnHealthModifiedDelegate(int health);
+    public OnHealthModifiedDelegate OnHealthModified;
     public Grappler grappler;
 
+    public int Health { get { return _health; } set { _health = value; OnHealthModified(_health);  } }
+    private int _health;
     // Use this for initialization
+    void Awake()
+    {
+        Health = 3;
+    }
+
     void Start () {
         rb2D = GetComponent<Rigidbody2D>();
         
@@ -44,13 +53,18 @@ public class Player : MonoBehaviour {
     void Shoot()
     {
         grappler.Shoot(transform.position, inputManager.mousePosition,whatIsGround);
-        
+        TakeDamage();
     }
 
     void ReleaseGrappler()
     {
 
         grappler.Release();        
+    }
+    public void TakeDamage()
+    {
+        Health -= 1;
+        Health = Mathf.Max(Health, 0);
     }
 
 }
